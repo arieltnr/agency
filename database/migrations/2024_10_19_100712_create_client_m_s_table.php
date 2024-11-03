@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('client_toko');
             $table->string('no_hp');
             $table->boolean('status')->default(true);
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

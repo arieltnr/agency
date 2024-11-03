@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Validation\ValidationException;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use stdClass;
@@ -69,6 +68,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -91,22 +91,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }
-
-    protected function beforeCreate(array $data): array
-    {
-        if ($data['password'] !== $data['password_confirmation']) {
-            throw ValidationException::withMessages([
-                'password_confirmation' => 'Password dan Konfirmasi Password tidak sama.',
-            ]);
-        }
-
-        // Hash password jika valid
-        $data['password'] = bcrypt($data['password']);
-        
-        // Hapus konfirmasi password dari data sebelum disimpan
-        unset($data['password_confirmation']);
-        
-        return $data;
     }
 }

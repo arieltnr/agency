@@ -49,8 +49,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function client(): HasMany
+    protected static function booted()
     {
-        return $this->hasMany(ClientM::class);
+        static::deleting(function ($user) {
+            if ($user->client_id) {
+                $user->client()->delete();
+            }
+        });
+    }
+
+    // Relasi ke ClientM
+    public function client()
+    {
+        return $this->belongsTo(ClientM::class, 'client_id');
     }
 }

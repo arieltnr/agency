@@ -35,21 +35,28 @@ class ClientMResource extends Resource
                     ->label('No. HP')
                     ->required()
                     ->maxLength(15),
+
+                // Tambahkan form field untuk data User
+                Forms\Components\TextInput::make('email')
+                    ->label('Email')
+                    ->required()
+                    ->email(),
+                Forms\Components\TextInput::make('password')
+                    ->label('Password')
+                    ->required()
+                    ->password()
+                    ->revealable(),
+                Forms\Components\TextInput::make('password_confirmation')
+                    ->label('Konfirmasi Password')
+                    ->password()
+                    ->revealable()
+                    ->required()
+                    ->same('password') // Validasi agar sama dengan password
+                    ->dehydrated(false), // Tidak menyimpan ke database
                 Forms\Components\Toggle::make('status')
                     ->required()
                     ->label('Status Aktif')
                     ->default(true),
-
-                // Tambahkan form field untuk data User
-                Forms\Components\TextInput::make('email')
-                    ->label('Email User')
-                    ->required()
-                    ->email(),
-                Forms\Components\TextInput::make('password')
-                    ->label('Password User')
-                    ->required()
-                    ->password()
-                    ->revealable(),
             ]);
     }
 
@@ -77,6 +84,7 @@ class ClientMResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
