@@ -25,13 +25,31 @@ class ClientMResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('client_nama')->label('Nama Client')->required(),
-                Forms\Components\TextInput::make('client_toko')->label('Nama Toko')->required(),
-                Forms\Components\TextInput::make('no_hp')->label('No. HP')->required()->maxLength(15),
+                Forms\Components\TextInput::make('client_nama')
+                    ->label('Nama Client')
+                    ->required(),
+                Forms\Components\TextInput::make('client_toko')
+                    ->label('Nama Toko')
+                    ->required(),
+                Forms\Components\TextInput::make('no_hp')
+                    ->label('No. HP')
+                    ->required()
+                    ->maxLength(15),
                 Forms\Components\Toggle::make('status')
                     ->required()
                     ->label('Status Aktif')
-                    ->default(true)
+                    ->default(true),
+
+                // Tambahkan form field untuk data User
+                Forms\Components\TextInput::make('email')
+                    ->label('Email User')
+                    ->required()
+                    ->email(),
+                Forms\Components\TextInput::make('password')
+                    ->label('Password User')
+                    ->required()
+                    ->password()
+                    ->revealable(),
             ]);
     }
 

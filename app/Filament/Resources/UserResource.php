@@ -3,16 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\ClientM;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Validation\ValidationException;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
@@ -31,23 +27,6 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('type')
-                ->options([
-                    1 => 'Admin',
-                    3 => 'Client',
-                ])
-                    ->required()
-                    ->reactive()
-                    ->afterStateUpdated(fn ($state, callable $set) => $set('client_id', null)),
-                    Forms\Components\Select::make('client_id')
-                    ->relationship('client', 'client_nama', function ($query) {
-                        return $query->where('status', true);
-                    })
-                    ->label('Nama Client')
-                    ->required()
-                    ->visible(fn ($get) => $get('type') == 3) // Tampilkan jika type adalah Client
-                    ->reactive()
-                    ->afterStateUpdated(fn ($state, callable $set) => $set('name', $state ? ClientM::find($state)->client_nama : null)),
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('email')
