@@ -26,6 +26,10 @@ class ClientM extends Model
             // Hapus user terkait berdasarkan client_id
             $client->users()->delete();
         });
+
+        static::creating(function ($client) {
+            $client->created_by = auth()->id();
+        });
     }
 
     public function users()

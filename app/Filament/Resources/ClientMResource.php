@@ -83,6 +83,10 @@ class ClientMResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('viewWizard')
+                ->label('View Wizard')
+                ->url(fn($record) => route('filament.resources.ClientMResource.pages.wizard-page', ['record' => $record->id])) // Arahkan ke page Filament
+                ->openUrlInNewTab(), // Membuka di tab baru
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
