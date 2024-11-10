@@ -27,6 +27,9 @@ class KontenTResource extends Resource
 
     protected static ?string $navigationLabel = 'Konten';
 
+    protected static ?string $navigationGroup = 'Konten';
+
+
     public static function form(Form $form): Form
     {
         return $form
