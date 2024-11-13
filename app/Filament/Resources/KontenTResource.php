@@ -38,6 +38,7 @@ class KontenTResource extends Resource
                     ->relationship('client', 'client_nama', function ($query) {
                         return $query->where('status', true);
                     })
+                    ->searchable()
                     ->label('Nama Client')
                     ->required(),
                 Forms\Components\TextInput::make('konten_nama')
