@@ -81,34 +81,62 @@ class ClientOnboardingResource extends Resource
                                 'TikTok' => 'TikTok',
                                 'Facebook' => 'Facebook',
                             ]),
-                        Forms\Components\TextInput::make('gaya_komunikasi')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\Textarea::make('gaya_visual')
-                            ->required(),
-                        Forms\Components\TextInput::make('nada_bahasa')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\Textarea::make('perasaan_diinginkan')
-                            ->required(),
-                        Forms\Components\Textarea::make('merek_inspirasi')
+                        Forms\Components\Select::make('gaya_komunikasi')
+                            ->options([
+                                'Kasual dan Ramah' => 'Kasual dan Ramah',
+                                'Formal dan Profesional' => 'Formal dan Profesional',
+                                'Santai dan Humoris' => 'Santai dan Humoris',
+                            ]),
+                        Forms\Components\Select::make('gaya_visual')
+                            ->options([
+                                'Warna Lembut dan Hangat' => 'Warna Lembut dan Hangat',
+                                'Gaya Minimalis dan Elegan' => 'Gaya Minimalis dan Elegan',
+                                'Warna Tegas dan Berani' => 'Warna Tegas dan Berani',
+                            ]),
+                        Forms\Components\Select::make('nada_bahasa')
+                            ->options([
+                                'Hangat dan Ramah' => 'Hangat dan Ramah',
+                                'Formal dan Sopan' => 'Formal dan Sopan',
+                                'Humor dan Santai' => 'Humor dan Santai',
+                            ]),
+                        Forms\Components\Select::make('perasaan_diinginkan')
+                            ->options([
+                                'Nyaman' => 'Nyaman',
+                                'Terhubung' => 'Terhubung',
+                                'Terinspirasi' => 'Terinspirasi',
+                                'Dihargai' => 'Dihargai',
+                                'Penasaran' => 'Penasaran',
+                            ])
+                            ->multiple(),
+                        Forms\Components\TextInput::make('merek_inspirasi')
                             ->required()
                             ->maxLength(1000),
-                        Forms\Components\TextInput::make('representasi_visual')
-                            ->required()
-                            ->maxLength(255),
+                        Forms\Components\Select::make('representasi_visual')
+                            ->options([
+                                'Sederhana dan Elegan' => 'Sederhana dan Elegan',
+                                'Mewah dan Berkelas' => 'Mewah dan Berkelas',
+                                'Kasual dan Nyaman' => 'Kasual dan Nyaman',
+                            ]),
                         Forms\Components\Textarea::make('variasi_logo')
                             ->required()
                             ->maxLength(1000),
-                        Forms\Components\TextInput::make('elemen_grafis')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('filter_visual')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('konsistensi_visual')
-                            ->required()
-                            ->maxLength(255),
+                        Forms\Components\Select::make('elemen_grafis')
+                            ->options([
+                                'Tidak Ada' => 'Tidak Ada',
+                                'Garis Tipis dan Sederhana' => 'Garis Tipis dan Sederhana',
+                                'Pola Geometris' => 'Pola Geometris',
+                            ]),
+                        Forms\Components\Select::make('filter_visual')
+                            ->options([
+                                'Filter Nuansa Hangat' => 'Filter Nuansa Hangat',
+                                'Filter Cerah dan Tajam' => 'Filter Cerah dan Tajam',
+                                'Tanpa Filter' => 'Tanpa Filter',
+                            ]),
+                        Forms\Components\Select::make('konsistensi_visual')
+                            ->options([
+                                'Fleksibel Berdasarkan Platform' => 'Fleksibel Berdasarkan Platform',
+                                'Bervariasi Sesuai Konten' => 'Bervariasi Sesuai Konten',
+                            ]),
                         Forms\Components\TextInput::make('nama_admin')
                             ->required()
                             ->maxLength(255),
@@ -123,7 +151,7 @@ class ClientOnboardingResource extends Resource
                             ->required()
                             ->label('Warna')
                             ->default(true),
-                    ])->columns(3),
+                    ])->columns(4),
 
                 Step::make('Brand Visual Guideline')
                     ->schema([
@@ -151,7 +179,7 @@ class ClientOnboardingResource extends Resource
                         Forms\Components\Textarea::make('ringkasan')
                             ->required()
                             ->maxLength(1000),
-                    ]),
+                    ])->columns(3),
 
                 Step::make('Brand Voice Guideline')
                     ->schema([
@@ -181,7 +209,7 @@ class ClientOnboardingResource extends Resource
                             ->required(),
                         Forms\Components\Textarea::make('adaptasi_platform')
                             ->required(),
-                    ]),
+                    ])->columns(3),
 
                 Step::make('Mother Content')
                     ->schema([
@@ -204,7 +232,7 @@ class ClientOnboardingResource extends Resource
                             ->required(),
                         Forms\Components\Textarea::make('target_kpi')
                             ->required(),
-                    ]),
+                    ])->columns(4),
 
                 Step::make('Content Blueprint')
                     ->schema([
@@ -234,7 +262,7 @@ class ClientOnboardingResource extends Resource
                         Forms\Components\TextInput::make('status')
                             ->required()
                             ->maxLength(255),
-                    ]),
+                    ])->columns(4),
             ])
             ->skippable()
             ->persistStepInQueryString()
