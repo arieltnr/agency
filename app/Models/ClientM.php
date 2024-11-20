@@ -32,9 +32,9 @@ class ClientM extends Model
         });
     }
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany(User::class, 'client_id');
+        return $this->hasOne(User::class, 'client_id');
     }
 
     public function konten(): HasMany
